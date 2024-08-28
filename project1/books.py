@@ -41,3 +41,9 @@ async def read_author_category_by_query(book_author: str, category: str):
 @app.post('/books/create_book')
 async def create_book(new_book=Body()):
     BOOKS.append(new_book)
+
+@app.put('/books/update_book/')
+async def update_book(updated_book=Body()):
+    for i in range(len(BOOKS)):
+        if BOOKS[i]['title'].lower() == updated_book['title'].lower():
+            BOOKS[i] = updated_book
