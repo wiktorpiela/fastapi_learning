@@ -11,11 +11,12 @@ BOOKS = [
     {'title': 'Title Six', 'author': 'Author Two', 'category': 'math'}
 ]
 
+@app.get("/books")
+async def read_all_books():
+    return BOOKS
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-@app.get("/abc")
-async def abc():
-    return {"message": "Hello World2222"}
+@app.get('/books/{book_title}')
+async def read_book(book_title: str):
+    for book in BOOKS:
+        if book['title'].lower() == book_title.lower():
+            return book
