@@ -54,3 +54,19 @@ async def delete_book(book_title: str):
         if BOOKS[i]['title'].lower() == book_title.lower():
             BOOKS.pop(i)
             break
+
+@app.get('/books-by-author/{book_author}/')
+async def get_books_by_author_path(book_author: str):
+    books_to_return = []
+    for book in BOOKS:
+        if book['author'].lower() == book_author.lower():
+            books_to_return.append(book)
+    return books_to_return
+
+@app.get('/books-by-author/')
+async def get_books_by_author_query(book_author: str):
+    books_to_return = []
+    for book in BOOKS:
+        if book['author'].lower() == book_author.lower():
+            books_to_return.append(book)
+    return books_to_return
